@@ -2,6 +2,6 @@
 
 ## Sequência
 
-- [npm i]
-- [npm install -g json-server]
-- [json-server --watch src/assets/mock/service-list.json]
+- npm i
+- npm install -g json-server
+- json-server --watch src/assets/mock/service-list.json
