@@ -8,6 +8,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-chatService',
   templateUrl: './chatService.component.html',
@@ -15,6 +16,7 @@ import {
 })
 export class ChatServiceComponent implements OnInit {
   form: FormGroup;
+  queryFormGroup!: FormGroup
   model: Service
   atendiment = false;
   disabled = false
@@ -23,14 +25,17 @@ export class ChatServiceComponent implements OnInit {
   messageReceived: any
   durationInSeconds = 1;
 
+  result: any
+  messages = []
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(
     private readonly route: ActivatedRoute,
     private request: ServiceListService,
     private readonly router: Router,
     private fb: FormBuilder,
+    private httpClient: HttpClient,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -42,6 +47,7 @@ export class ChatServiceComponent implements OnInit {
             next: (result) => {
               this.model = result
               this.form = this.fb.group({
+                id: [result.id],
                 serviceAt: [result.serviceAt],
                 context: [result.context],
                 serviceAnd: [result.serviceAnd],
@@ -64,14 +70,12 @@ export class ChatServiceComponent implements OnInit {
             },
           }
         )
-        this.requestMessageSent(params?.serviceId)
         this.requestMessageReceived(params?.serviceId)
       }
     })
-  }
-
-  onSubmit(model) {
-    console.log("Enviar");
+    this.queryFormGroup = this.fb.group({
+      query: this.fb.control("")
+    })
   }
 
   setStep(index: number) {
@@ -99,22 +103,12 @@ export class ChatServiceComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       panelClass: ['snacker-primary']
     });
-
+    this.request.update(this.form.value, 'service')
     setTimeout(async () => {
       await this.router.navigateByUrl('service')
     }, 2000);
   }
-  requestMessageSent(id) {
-    this.request.getById(id, 'historyMessageSent').subscribe(
-      {
-        next: (result) => {
-          this.messageSent.push(result.messageSent);
-        },
-        error: (error) => {
-          throw error;
-        },
-      })
-  }
+
   requestMessageReceived(id) {
     this.request.getById(id, 'historyMessageReceived').subscribe(
       {
@@ -129,5 +123,29 @@ export class ChatServiceComponent implements OnInit {
   requestMenssage(message) {
     this.messageSent.push(message.value.message)
     this.form.get('message')?.reset();
+  }
+  handleAskGPT() {
+    let url = "https://api.openai.com/v1/chat/completions"
+    let httpHeader = new HttpHeaders()
+      .set(
+        "Authorization", "Bearer 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",
+      )
+    this.messages.push({
+      role: "user",
+      content: this.queryFormGroup.value.query
+    })
+    let payload = {
+      "model": "gpt-3.5-turbo",
+      "messages": this.messages,
+    }
+    this.httpClient.post(url, payload, { headers: httpHeader })
+      .subscribe({
+        next: (resp) => {
+          this.result = resp
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
   }
 }

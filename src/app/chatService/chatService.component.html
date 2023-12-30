@@ -53,6 +53,16 @@
                     </div>
                     <div class="col-2 ps-0 custom">
                       <button
+                        *ngIf="!this.disabled"
+                        disabled
+                        class="btn btn-info d-inline-flex"
+                        (click)="requestMenssage(form)"
+                      >
+                        <i class="ti ti-circle-check me-1"></i>Enviar
+                      </button>
+                      <button
+                        *ngIf="this.disabled"
+                        [disabled]="!queryFormGroup.valid"
                         class="btn btn-info d-inline-flex"
                         (click)="requestMenssage(form)"
                       >
@@ -203,6 +213,30 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header card-header-info">
+        <h4 class="card-title">Assistente virtual</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
+          <div class="mb-3">
+            <label class="form-label">Pergunta</label>
+            <textarea formControlName="query" class="form-control"></textarea>
+          </div>
+          <button class="btn btn-info">Enviar</button>
+        </form>
+        <div class="alert alert-info mt-2" *ngIf="this.result">
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              *ngFor="let choice of this.result?.choices"
+            >
+              {{ choice?.message?.content }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

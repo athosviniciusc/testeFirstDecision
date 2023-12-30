@@ -31,7 +31,9 @@ export class ServiceListService {
     )
   }
   update(resource: Service, url): Observable<Service> {
+    console.log(resource)
     const request = `${this.apiPath + url}/${resource.id}`;
+    console.log(request)
     return this.http.put(request, resource).pipe(
       map(() => resource),
       catchError(this.handleError),
