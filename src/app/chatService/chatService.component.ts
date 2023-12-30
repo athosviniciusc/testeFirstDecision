@@ -19,7 +19,7 @@ export class ChatServiceComponent implements OnInit {
   atendiment = false;
   disabled = false
   step = 0;
-  messageSent: any
+  messageSent = []
   messageReceived: any
   durationInSeconds = 1;
 
@@ -108,7 +108,7 @@ export class ChatServiceComponent implements OnInit {
     this.request.getById(id, 'historyMessageSent').subscribe(
       {
         next: (result) => {
-          this.messageSent = result;
+          this.messageSent.push(result.messageSent);
         },
         error: (error) => {
           throw error;
@@ -125,5 +125,9 @@ export class ChatServiceComponent implements OnInit {
           throw error;
         },
       })
+  }
+  requestMenssage(message) {
+    this.messageSent.push(message.value.message)
+    this.form.get('message')?.reset();
   }
 }

@@ -24,7 +24,7 @@ export class ServiceListService {
     );
   }
 
-  getById(id, url): Observable<Service> {
+  getById(id, url): Observable<any> {
     const request = `${this.apiPath + url}/${id}`;
     return this.http.get(request).pipe(
       catchError(this.handleError),

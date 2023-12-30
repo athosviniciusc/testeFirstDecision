@@ -25,12 +25,11 @@
                       >
                     </p>
                   </div>
-                  <div class="message sent">
-                    <p>
-                      {{ this.messageSent?.messageSent }}<br /><span
-                        >16:20</span
-                      >
-                    </p>
+                  <div
+                    class="message sent"
+                    *ngFor="let chat of this.messageSent"
+                  >
+                    <p>{{ chat }}<br /><span>16:20</span></p>
                   </div>
                 </div>
                 <div class="card-footer p-1">
@@ -53,7 +52,10 @@
                       />
                     </div>
                     <div class="col-2 ps-0 custom">
-                      <button disabled class="btn btn-info d-inline-flex">
+                      <button
+                        class="btn btn-info d-inline-flex"
+                        (click)="requestMenssage(form)"
+                      >
                         <i class="ti ti-circle-check me-1"></i>Enviar
                       </button>
                     </div>
