@@ -1,4 +1,4 @@
-# [Tutorial para funcionar o projeto]![version][version-badge]][CHANGELOG]
+# Tutorial para funcionar o projeto!
 
 ## Sequência
 

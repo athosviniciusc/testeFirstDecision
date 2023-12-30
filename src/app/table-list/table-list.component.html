@@ -25,11 +25,8 @@
                     <td>{{ convertDataHours(serv.serviceAt) }}</td>
                     <td>{{ serv.context }}</td>
                     <td>{{ convertData(serv.serviceAnd) }}</td>
-                    <td *ngIf="serv.status">
+                    <td>
                       <span class="badge bg-success rounded">Disponível</span>
-                    </td>
-                    <td *ngIf="!serv.status">
-                      <span class="badge bg-info rounded">Indisponível</span>
                     </td>
                     <td>
                       <button
