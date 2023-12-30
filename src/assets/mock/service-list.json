@@ -1,0 +1,83 @@
+{
+  "service": [
+    {
+      "id": 1,
+      "serviceAt": "2022-12-07",
+      "context": "Atendimento virtual",
+      "serviceAnd": "2023-12-07",
+      "status": true,
+      "person": {
+        "name": "João Pedro",
+        "cpf": "000.000.000-00",
+        "phone": "(00) 00000-0000",
+        "adress": {
+          "city": "Palmas",
+          "state": "Tocantins",
+          "postalCode": "77019506"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "serviceAt": "2021-10-05",
+      "context": "Atendimento Humano",
+      "serviceAnd": "2022-10-05",
+      "status": false,
+      "person": {
+        "name": "Pedro Henrique",
+        "cpf": "000.000.000-00",
+        "phone": "(00) 00000-0000",
+        "adress": {
+          "city": "Gurupi",
+          "state": "Tocantins",
+          "postalCode": "00000000"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "serviceAt": "2022-08-01",
+      "context": "Atendimento virtual",
+      "serviceAnd": "2023-08-01",
+      "status": false,
+      "person": {
+        "name": "Lucas Pedro",
+        "cpf": "000.000.000-00",
+        "phone": "(00) 00000-0000",
+        "adress": {
+          "city": "Goiânia",
+          "state": "Goiás",
+          "postalCode": "00000000"
+        }
+      }
+    }
+  ],
+  "historyMessageReceived": [
+    {
+      "id": 1,
+      "messageReceived": "Olá, preciso de ajuda!"
+    },
+    {
+      "id": 2,
+      "messageReceived": "Olá, isso é um teste!"
+    },
+    {
+      "id": 3,
+      "messageReceived": "Bom dia!"
+    }
+  ],
+  "historyMessageSent": [
+    {
+      "id": 1,
+      "messageSent": "Olá, em que eu posso ajudar?"
+    },
+    {
+      "id": 2,
+      "messageSent": "Olá, em que eu posso ajudar?"
+    },
+    {
+      "id": 3,
+      "messageSent": "Olá, em que eu posso ajudar?"
+    }
+  ]
+}

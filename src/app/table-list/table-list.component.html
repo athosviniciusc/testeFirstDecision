@@ -1,0 +1,57 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-plain">
+          <div class="card-header card-header-info">
+            <h4 class="card-title mt-0">Atendimentos Virtual ou Humano</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="">
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Tempo de espera</th>
+                  <th>Contexto</th>
+                  <th>Último Atendimento</th>
+                  <th>Status</th>
+                  <th>Acessar</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let serv of service">
+                    <td>{{ serv.id }}</td>
+                    <td>{{ serv.person.name }}</td>
+                    <td>{{ convertDataHours(serv.serviceAt) }}</td>
+                    <td>{{ serv.context }}</td>
+                    <td>{{ convertData(serv.serviceAnd) }}</td>
+                    <td *ngIf="serv.status">
+                      <span class="badge bg-success rounded">Disponível</span>
+                    </td>
+                    <td *ngIf="!serv.status">
+                      <span class="badge bg-info rounded">Indisponível</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-outline-info d-inline-flex"
+                        aria-placeholder="Visualizar"
+                        (click)="openService(serv)"
+                      >
+                        <i class="material-icons"> open_in_new </i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 mt-3" *ngIf="this.validate">
+              <p style="text-align: center">Carregando...</p>
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-info">
+        <div class="d-flex align-items-center justify-content-between">
+          <h4 class="card-title">Atendimento virtual</h4>
+          <a class="btn btn-secondary" [routerLink]="'/service'">
+            <i class="ti ti-arrow-back"></i>Voltar
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" autocomplete="off" *ngIf="form">
+          <div class="row">
+            <div class="col-8">
+              <div class="card table-card" style="height: 80vh">
+                <div class="card-header">
+                  <h3>{{ model?.person?.name }}</h3>
+                </div>
+                <div class="card-body chat-box">
+                  <div class="message received">
+                    <p>
+                      {{ this.messageReceived.messageReceived }}<br /><span
+                        >16:20</span
+                      >
+                    </p>
+                  </div>
+                  <div class="message sent">
+                    <p>
+                      {{ this.messageSent.messageSent }}<br /><span>16:20</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="card-footer p-1">
+                  <div class="row" style="width: 100%">
+                    <div class="col">
+                      <input
+                        *ngIf="!this.disabled"
+                        type="input"
+                        disabled="`this.disabled`"
+                        class="form-control"
+                        formControlName="mensage"
+                        placeholder="Digite sua mensagem..."
+                      />
+                      <input
+                        *ngIf="this.disabled"
+                        type="input"
+                        class="form-control"
+                        formControlName="mensage"
+                        placeholder="Digite sua mensagem..."
+                      />
+                    </div>
+                    <div class="col-2 ps-0 custom">
+                      <button disabled class="btn btn-info d-inline-flex">
+                        <i class="ti ti-circle-check me-1"></i>Enviar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <mat-accordion class="example-headers-align">
+                <mat-expansion-panel
+                  [expanded]="step === 0"
+                  (opened)="setStep(0)"
+                  hideToggle
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Dados Pessoais</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-form-field formGroupName="person">
+                    <mat-label>Nome Completo</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="name"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="name"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field formGroupName="person">
+                    <mat-label>CPF</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="cpf"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="cpf"
+                    />
+                  </mat-form-field>
+                  <mat-form-field formGroupName="person">
+                    <mat-label>Telefone</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="phone"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="phone"
+                    />
+                  </mat-form-field>
+                  <mat-action-row>
+                    <button mat-button color="primary" (click)="nextStep()">
+                      Próximo
+                    </button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel
+                  [expanded]="step === 1"
+                  (opened)="setStep(1)"
+                  hideToggle
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Endereço </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field formGroupName="adress">
+                    <mat-label>Estado</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="state"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="state"
+                    />
+                  </mat-form-field>
+                  <mat-form-field formGroupName="adress">
+                    <mat-label>Cidade</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="city"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="city"
+                    />
+                  </mat-form-field>
+                  <mat-form-field formGroupName="adress">
+                    <mat-label>Código Postal</mat-label>
+                    <input
+                      *ngIf="!this.disabled"
+                      readonly
+                      matInput
+                      formControlName="postalCode"
+                    />
+                    <input
+                      *ngIf="this.disabled"
+                      matInput
+                      formControlName="postalCode"
+                    />
+                  </mat-form-field>
+                  <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">
+                      Voltar
+                    </button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+              <div class="row mt-4">
+                <div class="col-12" style="text-align: center">
+                  <button
+                    *ngIf="!atendiment"
+                    class="btn btn-info d-inline-flex"
+                    (click)="inicilizationAttendiment()"
+                  >
+                    Iniciar atendimento
+                  </button>
+                  <button
+                    *ngIf="atendiment"
+                    class="btn btn-danger d-inline-flex"
+                    (click)="finishAttendiment(form)"
+                  >
+                    Encerrar atendimento
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

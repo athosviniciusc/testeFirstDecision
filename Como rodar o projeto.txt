@@ -1,0 +1,7 @@
+npm i 
+
+
+Para rodar a api basta rodar o cmd: 
+npm install -g json-server
+e depois
+json-server --watch src/assets/mock/service-list.json
