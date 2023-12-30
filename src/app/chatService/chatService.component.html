@@ -20,14 +20,16 @@
                 <div class="card-body chat-box">
                   <div class="message received">
                     <p>
-                      {{ this.messageReceived.messageReceived }}<br /><span
+                      {{ this.messageReceived?.messageReceived }}<br /><span
                         >16:20</span
                       >
                     </p>
                   </div>
                   <div class="message sent">
                     <p>
-                      {{ this.messageSent.messageSent }}<br /><span>16:20</span>
+                      {{ this.messageSent?.messageSent }}<br /><span
+                        >16:20</span
+                      >
                     </p>
                   </div>
                 </div>
@@ -39,14 +41,14 @@
                         type="input"
                         disabled="`this.disabled`"
                         class="form-control"
-                        formControlName="mensage"
+                        formControlName="message"
                         placeholder="Digite sua mensagem..."
                       />
                       <input
                         *ngIf="this.disabled"
                         type="input"
                         class="form-control"
-                        formControlName="mensage"
+                        formControlName="message"
                         placeholder="Digite sua mensagem..."
                       />
                     </div>

@@ -46,6 +46,7 @@ export class ChatServiceComponent implements OnInit {
                 context: [result.context],
                 serviceAnd: [result.serviceAnd],
                 status: [result.status],
+                message: '',
                 person: this.fb.group({
                   name: [result.person.name],
                   cpf: [result.person.cpf],
@@ -98,17 +99,16 @@ export class ChatServiceComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       panelClass: ['snacker-primary']
     });
-    
-    // setTimeout(async () => {
-    //   await this.router.navigateByUrl('service')
-    // }, 2000);
+
+    setTimeout(async () => {
+      await this.router.navigateByUrl('service')
+    }, 2000);
   }
   requestMessageSent(id) {
     this.request.getById(id, 'historyMessageSent').subscribe(
       {
         next: (result) => {
           this.messageSent = result;
-          console.log(this.messageSent)
         },
         error: (error) => {
           throw error;
@@ -120,7 +120,6 @@ export class ChatServiceComponent implements OnInit {
       {
         next: (result) => {
           this.messageReceived = result;
-          console.log(this.messageReceived)
         },
         error: (error) => {
           throw error;

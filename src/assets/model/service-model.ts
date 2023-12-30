@@ -4,6 +4,7 @@ export interface Service {
   context?: string,
   serviceAnd?: Date,
   status?: boolean,
+  message?: string,
   person?: {
     name?: string,
     cpf?: string,

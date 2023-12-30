@@ -25,7 +25,6 @@ export class TableListComponent implements OnInit {
         next: (result) => {
           this.validate = false
           this.service = result;
-          console.log(this.service)
         },
         error: (error) => {
           this.validate = true

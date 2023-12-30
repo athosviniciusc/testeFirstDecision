@@ -19,7 +19,6 @@ export class ServiceListService {
 
 
   getAll(url): Observable<Service> {
-    console.log(this.apiPath + url)
     return this.http.get(this.apiPath + url).pipe(
       catchError(this.handleError),
     );
